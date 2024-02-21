@@ -1,0 +1,42 @@
+<nav class="bg-nav navbar navbar-expand-lg mb-3">
+    <div class="container-fluid">
+
+        <div>
+            {#            <img class="me-2 w-25 p-2" src="#" alt="logo"> #}
+            <a class="logo" href="{{ path('app_main') }}">EniSorties</a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+
+                {% if is_granted('IS_AUTHENTICATED') %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_profil', {'id' : app.user.id}) }}">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_sortie_index') }}">Sorties</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                {% if not is_granted('IS_AUTHENTICATED') %}
+                    <li class="nav-item">
+                        <a class="nav-link connexion" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link inscription" href="{{ path('app_register') }}">S'inscrire</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
